@@ -1,0 +1,31 @@
+[project]
+name = "shot_shaker"
+description = "Camera shake tool for 3dsMax."
+version = "0.0.0"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "PySide6>6,<7",
+    "black>=24.0",
+    "python-semantic-release>=9.0",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["shot_shaker"]
+
+[tool.semantic_release]
+version_toml  = ["pyproject.toml:project.version"]
+version_variables = ["shot_shaker/__init__.py:__version__"]
+
+[tool.semantic_release.remote]
+ignore_token_for_push = true  # use ssh keys
+
+[tool.black]
+skip-string-normalization = true
