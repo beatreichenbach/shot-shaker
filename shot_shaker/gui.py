@@ -4,10 +4,21 @@ import glob
 import logging
 import os
 
-from PySide6 import QtCore, QtGui, QtWidgets
+try:
+    from PySide6 import QtCore, QtGui, QtWidgets
+
+    QAction = QtGui.QAction
+    Dialog = QtCore.Qt.WindowType.Dialog
+except ImportError:
+    from PySide2 import QtCore, QtGui, QtWidgets
+
+    QAction = QtWidgets.QAction
+    Dialog = QtCore.Qt.Dialog
+
 
 import shot_shaker
 from shot_shaker import core
+
 
 logger = logging.getLogger(__name__)
 
@@ -132,15 +143,15 @@ class ShotShaker(QtWidgets.QWidget):
         toolbar = QtWidgets.QToolBar()
         layout.addWidget(toolbar)
 
-        action = QtGui.QAction('Create', parent=self)
+        action = QAction('Create', parent=self)
         action.triggered.connect(self.create_shake)
         toolbar.addAction(action)
 
-        action = QtGui.QAction('Delete', parent=self)
+        action = QAction('Delete', parent=self)
         action.triggered.connect(self.delete)
         toolbar.addAction(action)
 
-        action = QtGui.QAction('Refresh', parent=self)
+        action = QAction('Refresh', parent=self)
         action.triggered.connect(self.refresh)
         toolbar.addAction(action)
 
@@ -249,7 +260,7 @@ def show() -> None:
         logger.debug(f'Creating new window ...')
         window = ShotShaker()
         main_window = get_main_window()
-        window.setParent(main_window, QtCore.Qt.WindowType.Dialog)
+        window.setParent(main_window, Dialog)
     window.show()
 
 
