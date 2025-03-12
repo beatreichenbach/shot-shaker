@@ -1,7 +1,7 @@
 [project]
 name = "shot_shaker"
 description = "Camera shake tool for 3dsMax."
-version = "0.1.0"
+version = "0.1.1"
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = []

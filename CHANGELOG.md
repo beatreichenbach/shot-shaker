@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v0.1.1 (2025-03-12)
+
+### Bug Fixes
+
+- Make installable from anywhere
+  ([`0af209a`](https://github.com/beatreichenbach/shot-shaker/commit/0af209ab25bf9b12367280bef021efe59cdcbab8))
+
+### Documentation
+
+- Update
+  ([`6517655`](https://github.com/beatreichenbach/shot-shaker/commit/6517655c3790952b07e90d3937ede3195be8a272))
+
+
 ## v0.1.0 (2025-03-05)
 
 ### Bug Fixes
