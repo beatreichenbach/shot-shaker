@@ -6,16 +6,9 @@ from pymxs import runtime as rt
 logger = logging.getLogger(__name__)
 
 
-def install() -> None:
-    scripts_path = rt.getDir(rt.Name('userScripts')) or ''
-    scripts_path = os.path.normpath(scripts_path)
-
-    if not scripts_path:
-        logging.error('Could not find userScripts directory.')
-        return
-
+def install(project_dir: str) -> None:
     try:
-        create_macro_scripts(scripts_path=scripts_path)
+        create_macro_scripts(os.path.normpath(project_dir))
     except RuntimeError as e:
         logging.error('Could not install MacroScript.')
         logging.error(e)
@@ -24,7 +17,7 @@ def install() -> None:
     logging.info('Installation successful.')
 
 
-def create_macro_scripts(scripts_path: str) -> None:
+def create_macro_scripts(path: str) -> None:
     script = (
         'macroScript ShotShaker '
         'category:"Plugins" '
@@ -34,7 +27,7 @@ def create_macro_scripts(scripts_path: str) -> None:
         '(\n'
         '  on execute do (\n'
         '    python.Execute "import sys"\n'
-        '    python.Execute "path = r\'' + scripts_path + '\'"\n'
+        '    python.Execute "path = r\'' + path + '\'"\n'
         '    python.Execute "if path not in sys.path: sys.path.append(path)"\n'
         '    python.Execute "from shot_shaker.gui import show; show()"\n'
         '  )\n'
@@ -51,7 +44,7 @@ def create_macro_scripts(scripts_path: str) -> None:
         '(\n'
         '  on execute do (\n'
         '    python.Execute "import sys"\n'
-        '    python.Execute "path = r\'' + scripts_path + '\'"\n'
+        '    python.Execute "path = r\'' + path + '\'"\n'
         '    python.Execute "if path not in sys.path: sys.path.append(path)"\n'
         '    python.Execute "from shot_shaker.lib import reload; reload()"\n'
         '  )\n'
